@@ -17,6 +17,7 @@ passport.use('google-login',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
+        console.log("✅ Google Profile received:", profile);
         let user = await User.findOne({ googleId: profile.id });
 
         if (!user) {

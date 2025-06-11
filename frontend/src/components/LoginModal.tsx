@@ -31,7 +31,9 @@ const LoginModal: React.FC = () => {
 
         <div className="text-center text-gray-400 mb-4">OR</div>
 
-        <button className="w-full py-2 rounded-lg bg-white text-black mb-2 flex items-center justify-center gap-2">
+        <button 
+        onClick={() => window.location.href = import.meta.env.VITE_domainName + "/auth/google/login"}
+        className="w-full py-2 rounded-lg bg-white text-black mb-2 flex items-center justify-center gap-2">
           <img src="/google-icon.svg" alt="g" className="h-5 w-5" /> Sign in with Google
         </button>
         <button className="w-full py-2 rounded-lg bg-white text-black flex items-center justify-center gap-2">

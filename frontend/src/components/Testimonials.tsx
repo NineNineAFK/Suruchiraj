@@ -26,7 +26,7 @@ const testimonials: Testimonial[] = [
     company: 'Facebook',
     text: ` Suruchiraj spices make my food look and taste amazing. They help me create beautiful dishes 
     and get noticed for my cooking.`,
-    image: '/userpp/Anya.png',
+    image: '/userpp/anya.png',
     rating: 5,
   },
   {
@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
     company: 'Facebook',
     text: `I love Suruchiraj's spices because they are healthy and pure. They help me make tasty, 
     nutritious meals for my wellness journey.`,
-    image: '/userpp/Rohan.png',
+    image: '/userpp/rohan.png',
     rating: 4,
   },
   {
@@ -53,7 +53,7 @@ const testimonials: Testimonial[] = [
     company: 'Instagram',
     text: `Suruchiraj helps me cook real dishes from around the world. I love learning about the history 
     and culture of their unique spices.`,
-    image: '/userpp/Deepak.png',
+    image: '/userpp/deepak.png',
     rating: 5,
   },
   {
@@ -71,7 +71,7 @@ const testimonials: Testimonial[] = [
     company: 'Instagram',
     text: `Suruchiraj spices are cheap and make my simple meals taste great. It's easy to cook delicious 
     food without spending a lot of money.`,
-    image: '/userpp/Arjun.png',
+    image: '/userpp/arjun.png',
     rating: 4,
   },
   {
@@ -80,7 +80,7 @@ const testimonials: Testimonial[] = [
     company: 'Facebook',
     text: `I trust Suruchiraj because their spices are good for the Earth and sourced fairly. They make it 
     easy to cook in a way that matches my values.`,
-    image: '/userpp/Shanti.png',
+    image: '/userpp/shanti.png',
     rating: 4,
   },
   {
@@ -89,7 +89,7 @@ const testimonials: Testimonial[] = [
     company: 'Facebook',
     text: ` Suruchiraj spices always deliver great flavor, which is perfect for my tech-driven cooking. 
     They help me try new recipes and share my creations online.`,
-    image: '/userpp/Karan.png',
+    image: '/userpp/karan.png',
     rating: 4,
   },
   {
@@ -98,7 +98,7 @@ const testimonials: Testimonial[] = [
     company: 'Facebook',
     text: ` Suruchiraj helps me explore the rich history of food through their authentic spices. It's like 
     taking a journey into different cultures with every dish.`,
-    image: '/userpp/Lakshmi.png',
+    image: '/userpp/lakshmi.png',
     rating: 4,
   },
   {
@@ -107,7 +107,7 @@ const testimonials: Testimonial[] = [
     company: 'Facebook',
     text: `Cooking is fun with Suruchiraj because their spices are always good quality and easy to use. 
     They make every meal a special and enjoyable experience.`,
-    image: '/userpp/Gopal.png',
+    image: '/userpp/gopal.png',
     rating: 4,
   },
 ];
