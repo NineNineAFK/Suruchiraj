@@ -21,17 +21,23 @@ router.get(
 
 
 
-// Logout route
 router.get("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
       console.log(err);
       return next(err);
     }
-    res.clearCookie("uid"); // Clear the JWT cookie
+
+    res.clearCookie("uid", {
+      httpOnly: true,
+      secure: false, // must match your res.cookie settings
+      sameSite: "lax", // must match too
+    });
+
     res.redirect(process.env.CLIENT_URL);
   });
 });
+
 
 
 

@@ -1,5 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { RecoilRoot } from 'recoil'; // ✅ NEW: Recoil wrapper
+import { Toaster } from 'react-hot-toast';
+
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import WhyChooseUs from './components/WhyChooseUs';
@@ -8,10 +11,9 @@ import TrendingMasalas from './components/TrendingMasalas';
 import InternationalCuisine from './components/InternationalCuisine';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
-import { Toaster } from 'react-hot-toast';
-import LoginModal from './components/LoginModal'; // ✅ NEW
+import LoginModal from './components/LoginModal';
 
-// ✅ CONTEXT
+// CONTEXT
 import { LoginModalProvider } from './context/LoginModalContext';
 
 // Category Pages
@@ -21,6 +23,9 @@ import Snacks from './pages/categories/Snacks';
 import Soups from './pages/categories/Soups';
 import Biryani from './pages/categories/Biryani';
 import SouthIndian from './pages/categories/SouthIndian';
+import Maharashtrian from './pages/categories/Maharashtrian';
+import Beverages from './pages/categories/Beverages';
+import Pickle from './pages/categories/Pickle'; 
 
 // Cuisine Pages
 import American from './pages/cuisines/American';
@@ -28,6 +33,10 @@ import Thai from './pages/cuisines/Thai';
 import Mexican from './pages/cuisines/Mexican';
 import Italian from './pages/cuisines/Italian';
 import Chinese from './pages/cuisines/Chinese';
+import Other from './pages/cuisines/Other';
+
+// Sub Products Page
+import SubProducts from './pages/SubProducts';
 
 const HomePage: React.FC = () => {
   return (
@@ -68,34 +77,45 @@ const HomePage: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <LoginModalProvider>
-        <div className="font-sans text-gray-900">
-          <Navbar />
-          <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
-          <LoginModal /> {/* ✅ Login Popup available globally */}
+    <RecoilRoot> {/* ✅ Recoil context added */}
+      <Router>
+        <LoginModalProvider>
+          <div className="font-sans text-gray-900">
+            <Navbar />
+            <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
+            <LoginModal />
 
-          <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
 
-            {/* Top Category Pages */}
-            <Route path="/categories/Veg" element={<Veg />} />
-            <Route path="/categories/NonVeg" element={<NonVeg />} />
-            <Route path="/categories/Snacks" element={<Snacks />} />
-            <Route path="/categories/Soups" element={<Soups />} />
-            <Route path="/categories/biryani" element={<Biryani />} />
-            <Route path="/categories/SouthIndian" element={<SouthIndian />} />
+              {/* Top Category Pages */}
+              <Route path="/categories/Veg" element={<Veg />} />
+              <Route path="/categories/NonVeg" element={<NonVeg />} />
+              <Route path="/categories/Snacks" element={<Snacks />} />
+              <Route path="/categories/Soups" element={<Soups />} />
+              <Route path="/categories/biryani" element={<Biryani />} />
+              <Route path="/categories/SouthIndian" element={<SouthIndian />} />
+              <Route path="/categories/Maharashtrian" element={<Maharashtrian />} />
+              <Route path="/categories/Beverages" element={<Beverages />} />
+              <Route path="/categories/pickle" element={<Pickle />} />
 
-            {/* International Cuisine Pages */}
-            <Route path="/cuisine/american" element={<American />} />
-            <Route path="/cuisine/thai" element={<Thai />} />
-            <Route path="/cuisine/mexican" element={<Mexican />} />
-            <Route path="/cuisine/italian" element={<Italian />} />
-            <Route path="/cuisine/chinese" element={<Chinese />} />
-          </Routes>
-        </div>
-      </LoginModalProvider>
-    </Router>
+              {/* International Cuisine Pages */}
+              <Route path="/cuisine/american" element={<American />} />
+              <Route path="/cuisine/thai" element={<Thai />} />
+              <Route path="/cuisine/mexican" element={<Mexican />} />
+              <Route path="/cuisine/italian" element={<Italian />} />
+              <Route path="/cuisine/chinese" element={<Chinese />} />
+              <Route path="/cuisine/other" element={<Other />} />
+
+              {/* Sub Products Page */}
+              <Route path="/sub-products" element={<SubProducts />} />
+
+              {/* Fallback Route */}
+            </Routes>
+          </div>
+        </LoginModalProvider>
+      </Router>
+    </RecoilRoot>
   );
 };
 

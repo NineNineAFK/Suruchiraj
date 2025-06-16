@@ -3,57 +3,58 @@ require("dotenv").config(); // ✅ Load .env variables
 const express = require("express");
 const path = require("path");
 const app = express();
-const cors = require('cors');
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("./config/passport");
+const { connectMongoDB } = require("./connect");
 const { restrictToLoggedInUserOnly } = require("./middlewares/auth");
 
-
-// CORS Configuration
+// 1. CORS Configuration
 app.use(cors({
-  origin: `${process.env.CLIENT_URL}`, // Frontend URL
-  credentials: true, // Allow credentials such as cookies to be sent
+  origin: process.env.CLIENT_URL, // your frontend URL
+  credentials: true // ✅ Send cookies across domains
 }));
 
-// Cookie and session middlewares
+
+
+
+// 2. Middleware setup
 app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// 3. Session configuration
 app.use(session({
   secret: "Aaditya@3737",
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false, // ✅ Required for localhost
+    sameSite: "lax", // or 'none' with secure:true + HTTPS
+  },
 }));
 
-// Passport initialization
+// 4. Passport authentication setup
 app.use(passport.initialize());
 app.use(passport.session());
 
+// 5. Routes
+app.use("/auth", require("./routes/auth")); // Google OAuth
+app.use("/user", require("./routes/user")); // User-related routes
+app.use("/open", require("./routes/openRouter")); // Public routes
+app.use("/", restrictToLoggedInUserOnly, require("./routes/staticRouter")); // Authenticated routes
 
-// Other middlewares
-app.use(express.json()); // Parse JSON bodies for other routes
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
-
-// Other routes
-app.use("/user", require("./routes/user"));
-app.use("/home", restrictToLoggedInUserOnly, require("./routes/staticRouter"));
-app.use("/open", require("./routes/openRouter"));
-app.use("/auth", require("./routes/auth"));
-
-
-
-
-
-// View engine setup
+// 6. View engine (if you're using EJS for rendering pages)
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-// MongoDB connection
-const { connectMongoDB } = require('./connect');
+// 7. MongoDB connection
 connectMongoDB(process.env.MONGO_URI);
 
-// Start the server
-app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000");
+// 8. Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
-
-

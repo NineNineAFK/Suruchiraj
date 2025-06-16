@@ -10,16 +10,19 @@ import 'swiper/css';
 interface Category {
   label: string;
   image: string;
-  path: string;  // Add path for navigation
+  path: string;
 }
 
 const categories: Category[] = [
   { label: 'Veg', image: '/categories/veg fp.png', path: '/categories/veg' },
   { label: 'Non Veg', image: '/categories/non veg fp.png', path: '/categories/nonveg' },
+  { label: 'Maharashtrian', image: '/categories/veg fp.png', path: '/categories/maharashtrian' },
+  { label: 'Beverages', image: '/categories/non veg fp.png', path: '/categories/beverages' }, 
   { label: 'Snacks', image: '/categories/Snacks fp.png', path: '/categories/snacks' },
   { label: 'Soups', image: '/categories/soup fp.png', path: '/categories/soups' },
-  { label: 'Biryani', image: '/categories/Biryani fp.png', path: '/categories/biryani' },
+  { label: 'Rice Mixes', image: '/categories/Biryani fp.png', path: '/categories/biryani' },
   { label: 'South Indian', image: '/categories/south india fp.png', path: '/categories/southindian' },
+  { label: 'Pickle', image: '/categories/soup fp.png', path: '/categories/pickle' },
 ];
 
 const TopCategories: React.FC = () => {
@@ -41,35 +44,39 @@ const TopCategories: React.FC = () => {
   };
 
   return (
-    <section id="categories" className="px-4 md:px-8 text-center relative font-heading">
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-white">
+    <section id="categories" className="md:mt-8 px-4 md:px-8 text-center relative font-heading">
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-4 md:mb-10 text-white">
         Top <span className="text-yellow-400">Categories</span>
       </h2>
 
-      <div className="block md:hidden overflow-x-auto pb-4">
-        <div className="flex gap-4 pl-1 w-max">
-          {categories.map((category, index) => (
-            <div
-              key={index}
-              onClick={() => handleCategoryClick(category.path)}
-              className="relative flex-shrink-0 w-[160px] h-[210px] bg-white/5 rounded-2xl border border-white/10 shadow-lg cursor-pointer"
-            >
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full overflow-hidden">
-                <img src={category.image} alt={category.label} className="w-full h-full object-cover" />
-              </div>
-              <div className="absolute bottom-4 w-full text-center px-2 text-sm font-medium text-white font-body">
-                {category.label}
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* ✅ MOBILE LAYOUT: Grid View */}
+<div className="grid grid-cols-4 gap-[3vw] px-[2vw] md:hidden">
+  {categories.map((category, index) => (
+    <div
+      key={index}
+      onClick={() => handleCategoryClick(category.path)}
+      className="relative w-full aspect-[3/4] bg-white/5 rounded-2xl border border-white/10 shadow-lg cursor-pointer overflow-hidden"
+    >
+      <div className="absolute -top-[6vw] -left-[5vw] w-[22vw] h-[22vw] rounded-full overflow-hidden">
+        <img
+          src={category.image}
+          alt={category.label}
+          className="w-full h-full object-cover"
+        />
       </div>
+      <div className="absolute bottom-[1.5vw] w-full text-end px-[1.5vw] text-[3vw] font-medium text-white font-body">
+        {category.label}
+      </div>
+    </div>
+  ))}
+</div>
 
-      {/* Navigation Arrows */}
+
+      {/* ✅ DESKTOP LAYOUT: Swiper */}
       <button
         onClick={() => swiperRef.current?.slidePrev()}
         disabled={isBeginning}
-        className={`absolute left-1 md:left-1 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full transition ${
+        className={`hidden md:flex absolute left-1 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full transition ${
           isBeginning
             ? 'bg-white/10 text-gray-400 cursor-not-allowed'
             : 'bg-white/20 text-white hover:bg-yellow-400 hover:text-black'
@@ -81,7 +88,7 @@ const TopCategories: React.FC = () => {
       <button
         onClick={() => swiperRef.current?.slideNext()}
         disabled={isEnd}
-        className={`absolute right-1 md:right-1 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full transition ${
+        className={`hidden md:flex absolute right-1 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full transition ${
           isEnd
             ? 'bg-white/10 text-gray-400 cursor-not-allowed'
             : 'bg-white/20 text-white hover:bg-yellow-400 hover:text-black'
@@ -90,7 +97,7 @@ const TopCategories: React.FC = () => {
         <FiChevronRight className="text-2xl" />
       </button>
 
-      <div className="relative max-w-5xl mx-auto overflow-visible">
+      <div className="relative max-w-5xl mx-auto overflow-visible hidden md:block">
         <Swiper
           onSwiper={(swiper: SwiperType) => {
             swiperRef.current = swiper;
@@ -119,14 +126,14 @@ const TopCategories: React.FC = () => {
             >
               <div
                 onClick={() => handleCategoryClick(category.path)}
-                className="relative cursor-pointer h-[240px] w-[180px] bg-transparent backdrop-blur-md rounded-3xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.03] border border-white/10 "
+                className="relative cursor-pointer h-[240px] w-[180px] bg-transparent backdrop-blur-md rounded-3xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.03] border border-white/10"
               >
                 {/* Image */}
                 <div className="absolute -top-6 -left-10 w-52 h-52 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:opacity-90">
                   <img
                     src={category.image}
                     alt={category.label}
-                    className="w-full h-full object-full"
+                    className="w-full h-full object-cover"
                   />
                 </div>
 

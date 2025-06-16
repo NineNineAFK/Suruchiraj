@@ -14,9 +14,9 @@ const features: Feature[] = [
 
 const WhyChooseUs: React.FC = () => {
   return (
-    <section className="my-10 px-4 text-center font-heading">
+    <section className="px-4 md:px-8 md:mt-10 text-center relative font-heading">
       {/* Section Title */}
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-white">
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-4 md:mb-10 text-white">
         Why <span className="text-yellow-400">Choose Us</span>
       </h2>
 

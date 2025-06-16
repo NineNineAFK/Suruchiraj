@@ -1,5 +1,3 @@
-// src/components/InternationalCuisine.tsx
-
 import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -35,6 +33,11 @@ const cuisines = [
     image: '/international cuisine/Chinese Cuisine.png',
     description: 'Explore ancient traditions and dynamic flavors in every delicious dish!',
   },
+  {
+    name: 'Other',
+    image: '/international cuisine/American Cuisine.png',
+    description: 'Discover a world of flavors beyond the ordinary!',
+  },
 ];
 
 const InternationalCuisine: React.FC = () => {
@@ -52,16 +55,16 @@ const InternationalCuisine: React.FC = () => {
   };
 
   return (
-    <section id="international" className="px-2 md:px-8 text-center relative font-heading">
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-white">
+    <section id="international" className="-mt-5 px-4 md:px-8 text-center relative font-heading">
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-4 md:mb-10 text-white">
         International <span className="text-yellow-400">Cuisine</span>
       </h2>
 
-      {/* Navigation Buttons */}
+      {/* Navigation Buttons (only show on md and above) */}
       <button
         onClick={() => swiperRef.current?.slidePrev()}
         disabled={isBeginning}
-        className={`absolute left-1 md:left-1 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full transition ${
+        className={`hidden md:block absolute left-1 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full transition ${
           isBeginning
             ? 'bg-white/10 text-gray-400 cursor-not-allowed'
             : 'bg-white/20 text-white hover:bg-yellow-400 hover:text-black'
@@ -73,7 +76,7 @@ const InternationalCuisine: React.FC = () => {
       <button
         onClick={() => swiperRef.current?.slideNext()}
         disabled={isEnd}
-        className={`absolute right-1 md:right-1 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full transition ${
+        className={`hidden md:block absolute right-1 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full transition ${
           isEnd
             ? 'bg-white/10 text-gray-400 cursor-not-allowed'
             : 'bg-white/20 text-white hover:bg-yellow-400 hover:text-black'
@@ -99,8 +102,8 @@ const InternationalCuisine: React.FC = () => {
           navigation={false}
           modules={[Navigation, Pagination]}
           breakpoints={{
-            0: { slidesPerView: 2 },
-            640: { slidesPerView: 2 },
+            0: { slidesPerView: 3 },
+            640: { slidesPerView: 3 },
             1024: { slidesPerView: 5 },
           }}
           className="pb-10"
@@ -112,10 +115,18 @@ const InternationalCuisine: React.FC = () => {
             >
               <div
                 onClick={() => navigate(`/cuisine/${cuisine.name.toLowerCase()}`)}
-                className="relative cursor-pointer h-[240px] w-[180px] bg-transparent backdrop-blur-md rounded-3xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.03] border border-white/10"
+                className="relative cursor-pointer 
+                  h-36 w-28 md:h-[240px] md:w-[180px] 
+                  bg-transparent backdrop-blur-md rounded-3xl 
+                  overflow-hidden shadow-lg transition-transform duration-300 
+                  hover:scale-[1.03] border border-white/10"
               >
                 {/* Image */}
-                <div className="absolute -top-6 -left-10 w-52 h-52 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:opacity-90">
+                <div
+                  className="absolute -top-[6vw] -left-[5vw] w-[28vw] h-[28vw] md:w-52 md:h-52 md:-top-6 md:-left-10
+                    rounded-full overflow-hidden transition-all duration-300 
+                    hover:scale-105 hover:opacity-90"
+                >
                   <img
                     src={cuisine.image}
                     alt={cuisine.name}
@@ -124,7 +135,7 @@ const InternationalCuisine: React.FC = () => {
                 </div>
 
                 {/* Label */}
-                <div className="absolute bottom-4 right-4 text-white text-lg font-semibold font-body text-right opacity-90">
+                <div className="absolute bottom-3 right-3 text-white text-sm md:text-lg font-semibold font-body text-right opacity-90">
                   {cuisine.name}
                 </div>
 

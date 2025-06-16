@@ -15,14 +15,14 @@ const MobileHeroSlide = ({ image, heading, subheading }: { image: string; headin
         backgroundPosition: 'center',
       }}
     >
-      <div className="flex flex-col justify-center pl-5 pr-3 text-white w-3/5 space-y-2">
+      <div className="flex flex-col justify-center pl-4 pr-3 text-white w-3/5 space-y-2">
         <h1 className="text-xl font-semibold font-heading leading-tight">
           {heading}
         </h1>
         <p className="text-[10px] text-white/80">{subheading}</p>
         <a
           href="#trending"
-          className="relative inline-block px-5 py-2 text-white font-semibold font-button text-sm rounded-full 
+          className="self-start -ml-1 mt-2 inline-block px-2.5 py-1.5 text-white font-semibold font-button text-xs rounded-full 
             bg-gray-900 border border-white/10 shadow-md overflow-hidden group
             transition-transform duration-300 transform hover:scale-105"
         >

@@ -121,25 +121,27 @@ const Testimonials: React.FC = () => {
   }, []);
 
   return (
-    <section className="px-4 text-center relative">
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-white font-heading">
+    <section className="-mt-4 px-4 md:px-8 text-center relative font-heading">
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-4 md:mb-10 text-white">
         What Our <span className="text-yellow-400">Customers Say</span>
       </h2>
 
-      <div className="relative max-w-6xl mx-auto">
+
+
+      <div className="relative max-w-6xl mx-auto hidden md:block">
         {/* Navigation Arrows */}
         <button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="absolute left-2 sm:-left-14 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 text-white p-2 sm:p-3 rounded-full hover:bg-yellow-400 hover:text-black transition"
+          className="absolute -left-14 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 text-white p-3 rounded-full hover:bg-yellow-400 hover:text-black transition"
         >
-          <FiChevronLeft className="text-xl sm:text-2xl" />
+          <FiChevronLeft className="text-2xl" />
         </button>
 
         <button
           onClick={() => swiperRef.current?.slideNext()}
-          className="absolute right-2 sm:-right-14 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 text-white p-2 sm:p-3 rounded-full hover:bg-yellow-400 hover:text-black transition"
+          className="absolute -right-14 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 text-white p-3 rounded-full hover:bg-yellow-400 hover:text-black transition"
         >
-          <FiChevronRight className="text-xl sm:text-2xl" />
+          <FiChevronRight className="text-2xl" />
         </button>
 
         <Swiper
@@ -153,9 +155,6 @@ const Testimonials: React.FC = () => {
           centeredSlides
           loop
           breakpoints={{
-            0: { slidesPerView: 1, spaceBetween: 10 },
-            640: { slidesPerView: 1, spaceBetween: 20 },
-            768: { slidesPerView: 2, spaceBetween: 30 },
             1024: { slidesPerView: 3, spaceBetween: 90 },
           }}
           coverflowEffect={{
@@ -174,7 +173,9 @@ const Testimonials: React.FC = () => {
             return (
               <SwiperSlide
                 key={t.id}
-                className={`h-[420px] flex flex-col justify-between rounded-xl p-6 text-left text-white border border-white/30 shadow-[0_0_10px_rgba(255,255,255,0.3)] transition-all duration-500
+                className={`h-[380px] flex flex-col justify-between rounded-xl 
+                  p-6 text-left text-white border border-white/30 
+                  shadow-[0_0_10px_rgba(255,255,255,0.3)] transition-all duration-500
                   ${
                     isActive
                       ? 'bg-gradient-to-br from-[#2e0545] to-[#541d7a] backdrop-blur-lg'
@@ -182,8 +183,8 @@ const Testimonials: React.FC = () => {
                   }`}
               >
                 <div>
-                  <div className="text-4xl sm:text-6xl mb-6 mt-6 ml-1 text-yellow-400 leading-none font-body">❝</div>
-                  <p className="text-xl sm:text-lg leading-relaxed whitespace-pre-line font-body">
+                  <div className="text-6xl mb-2 mt-6 ml-2 text-yellow-400 leading-none font-body">❝</div>
+                  <p className="text-lg leading-relaxed whitespace-pre-line font-body">
                     {t.text}
                   </p>
                 </div>
@@ -193,18 +194,18 @@ const Testimonials: React.FC = () => {
                     <img
                       src={t.image}
                       alt={t.name}
-                      className="w-20 h-20 sm:w-22 sm:h-22 rounded-full object-cover"
+                      className="w-16 h-16 rounded-full object-cover"
                     />
                     <div>
-                      <p className="text-base sm:text-md font-semibold ml-2 font-body">{t.name}</p>
-                      <p className="text-sm sm:text-base text-gray-300 ml-2 font-body">{t.company}</p>
+                      <p className="text-sm font-semibold ml-2 font-body">{t.name}</p>
+                      <p className="text-sm text-gray-300 ml-2 font-body">{t.company}</p>
                       <div className="flex space-x-1 mt-1 ml-2">
                         {[...Array(5)].map((_, i) => (
                           <AiFillStar
                             key={i}
                             className={`${
                               i < t.rating ? 'text-yellow-400' : 'text-white'
-                            } text-lg sm:text-xl`}
+                            } text-xl`}
                           />
                         ))}
                       </div>
@@ -214,6 +215,42 @@ const Testimonials: React.FC = () => {
               </SwiperSlide>
             );
           })}
+        </Swiper>
+      </div>
+
+      {/* === 📱 Mobile Swiper Carousel (below md) === */}
+      <div className="md:hidden">
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={16}
+          loop
+          pagination={{ clickable: true }}
+          modules={[EffectCoverflow, Pagination]}
+          className="pb-1"
+        >
+          {testimonials.map((t) => (
+            <SwiperSlide key={t.id}>
+              <div className="bg-white/10 text-white border border-white/20 p-4 rounded-[40px] shadow-md backdrop-blur-md">
+                <div className="text-4xl mb-2 mt-4 ml-4 text-left text-yellow-400 leading-none font-body">❝</div>
+                <p className="text-base leading-relaxed whitespace-pre-line font-body">{t.text}</p>
+                <div className="flex items-center gap-3 mt-4">
+                  <img src={t.image} alt={t.name} className="w-16 h-16 rounded-full object-cover" />
+                  <div>
+                    <p className="text-sm font-semibold font-body">{t.name}</p>
+                    <p className="text-xs text-gray-300 font-body">{t.company}</p>
+                    <div className="flex space-x-1 mt-1">
+                      {[...Array(5)].map((_, i) => (
+                        <AiFillStar
+                          key={i}
+                          className={`${i < t.rating ? 'text-yellow-400' : 'text-white'} text-sm`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </section>
